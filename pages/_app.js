@@ -1,5 +1,4 @@
 import "../styles/globals.css";
-// import "bootstrap/dist/css/bootstrap.css";
 import DefaultLayout from "../components/layout/DefaultLayout";
 import NavBarLayout from "../components/layout/NavBarLayout";
 

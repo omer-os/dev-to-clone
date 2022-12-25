@@ -8,8 +8,14 @@ import { addDoc, deleteDoc, getDocs, query, where } from "firebase/firestore";
 import { Authentication } from "./db";
 import { PostsCollection, UsersCollection } from "./collections";
 
-export const DeleteAllDocuments = async (col) => {
-  const res = await getDocs(col);
+export const DeleteUsers = async () => {
+  const res = await getDocs(UsersCollection);
+  res.docs.map((doc) => {
+    deleteDoc(doc.ref);
+  });
+};
+export const DeletePosts = async (col) => {
+  const res = await getDocs(PostsCollection);
   res.docs.map((doc) => {
     deleteDoc(doc.ref);
   });
@@ -62,7 +68,6 @@ export const CreateAccount = (email, password) => {
       }
     });
 };
-
 export const CheckIfLogged = () => {
   onAuthStateChanged(Authentication, (user) => {
     if (user) {
@@ -78,14 +83,25 @@ export const SginOutFromAccount = () => {
   signOut(Authentication);
 };
 
-export const GetUserPosts =async (uid) => {
+export const GetUserPosts = async (uid) => {
   const q = query(PostsCollection, where("userId", "==", uid));
-  
-  const posts = await getDocs(q)
-  return posts
+
+  const posts = await getDocs(q);
+  return posts;
 };
 
 export const GetAllUserIds = () => {
   const userids = getAllDocuments(UsersCollection);
   return userids;
+};
+
+export const GetMyDetails = async () => {
+  // const q = query(
+  //   UsersCollection,
+  //   where("userId", "==", Authentication.currentUser.uid)
+  // );
+  // const data = await getDocs(q);
+
+  // return data;
+  console.log(Authentication.currentUser);
 };

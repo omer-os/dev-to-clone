@@ -1,5 +1,9 @@
 import React from "react";
-import { DeleteAllDocuments } from "../backend/Functions";
+import {
+  DeleteAllDocuments,
+  DeletePosts,
+  DeleteUsers,
+} from "../backend/Functions";
 import { PostsCollection, UsersCollection } from "../backend/collections";
 
 export default function Test() {
@@ -7,7 +11,7 @@ export default function Test() {
     <div className="p-3 flex flex-wrap gap-4">
       <button
         onClick={() => {
-          DeleteAllDocuments(PostsCollection);
+          DeleteUsers();
         }}
         className="bg-zinc-900 text-xl font-bold p-2 rounded border border-zinc-800 active:scale-95 transition-all active:bg-zinc-800 capitalize"
       >
@@ -15,7 +19,7 @@ export default function Test() {
       </button>
       <button
         onClick={() => {
-          DeleteAllDocuments(UsersCollection);
+          DeletePosts();
         }}
         className="bg-zinc-900 text-xl font-bold p-2 rounded border border-zinc-800 active:scale-95 transition-all active:bg-zinc-800 capitalize"
       >

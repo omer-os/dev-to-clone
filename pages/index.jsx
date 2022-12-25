@@ -1,7 +1,6 @@
 import React from "react";
 import { getAllDocuments } from "../backend/Functions";
 import { PostsCollection } from "../backend/collections";
-import Link from "next/link";
 import PostCard from "../components/common/PostCard";
 
 export default function Home({ data }) {
