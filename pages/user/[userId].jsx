@@ -46,8 +46,8 @@ export default function UserDetails({ posts }) {
 
         <div className="flex-1 sm:p-2 py-2 flex flex-col gap-3">
           <div className="text-xl font-bold">Recent Posts</div>
-          {posts.map((post) => (
-            <PostCard post={post} />
+          {posts.map((post, index) => (
+            <PostCard key={index} post={post} />
           ))}
         </div>
       </div>

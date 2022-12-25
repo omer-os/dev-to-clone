@@ -11,7 +11,10 @@ export default function Home({ data }) {
 
   return (
     <div className="mt-4 flex flex-col gap-5">
-      {data && JSON.parse(data).map((post, index) => <PostCard post={post} />)}
+      {data &&
+        JSON.parse(data).map((post, index) => (
+          <PostCard key={index} post={post} />
+        ))}
     </div>
   );
 }
