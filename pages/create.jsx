@@ -11,6 +11,7 @@ import {
   DeleteAllDocuments,
 } from "../backend/Functions";
 import { PostsCollection } from "../backend/collections";
+import { Authentication } from "../backend/db";
 
 export default function Create({ posts }) {
   const [Title, setTitle] = useState("");
@@ -33,7 +34,6 @@ export default function Create({ posts }) {
           <button
             onClick={() => {
               DeleteAllDocuments(PostsCollection);
-              // console.log("added");
             }}
             className="w-max py-2 px-3 rounded border border-zinc-700 text-xs font-bold hover:bg-zinc-800 active:scale-95 active:bg-zinc-700 "
           >
@@ -79,9 +79,9 @@ export default function Create({ posts }) {
                 postTags: tags.split(" "),
                 postContent: Content,
                 // postImageData: imageData ? imageData : false,
-                userId: "kibiwebgoni",
-                postReactions:0,
-                postReadTime:2
+                userId: Authentication.currentUser.uid,
+                postReactions: 0,
+                postReadTime: 2,
               });
             }}
             className="bg-indigo-600 p-2 rounded font-bold active:scale-95 active:bg-indigo-700 text-sm transition-all"

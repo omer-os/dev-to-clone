@@ -5,13 +5,21 @@ import NavBarLayout from "../components/layout/NavBarLayout";
 
 export default function App({ Component, pageProps }) {
   let LayoutComponent;
-  if (Component.name === "Home") {
-    LayoutComponent = DefaultLayout;
-  }
-  if (Component.name === "Create") {
-    LayoutComponent = NavBarLayout;
-  } else {
-    LayoutComponent = DefaultLayout;
+
+  switch (Component.name) {
+    case "Home":
+      LayoutComponent = DefaultLayout;
+      break;
+    case "Test":
+      LayoutComponent = NavBarLayout;
+      break;
+    case "Create":
+      LayoutComponent = NavBarLayout;
+      break;
+
+    default:
+      LayoutComponent = NavBarLayout;
+      break;
   }
 
   return (

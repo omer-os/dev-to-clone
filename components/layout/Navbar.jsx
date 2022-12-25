@@ -1,9 +1,11 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import NavBarDropDown from "../common/NavBarDropDown";
 
 export default function Navbar() {
+  const [OpenDropDown, setOpenDropDown] = useState(false);
   return (
-    <div className="sticky top-0 left-0 bg-zinc-900 flex justify-center">
+    <div className="sticky z-40 shadow-xl top-0 left-0 bg-zinc-900 flex justify-center">
       <nav className="w-full max-w-[70em] px-4 shadow-xl justify-between items-center py-2 transition-all flex">
         <div className="flex gap-3">
           <button className="p-1 hover:bg-indigo-600/30 hover:ring-2 border-indigo-600/40 active:scale-95 transition-all rounded sm:hidden">
@@ -30,23 +32,21 @@ export default function Navbar() {
             create post
           </Link>
 
-          <Link
-            href="/"
-            className="p-2 flex items-center justify-center hover:bg-indigo-600/30 hover:ring-2 border-indigo-600/40 active:scale-95 transition-all rounded"
-          >
+          <div className="p-2 flex items-center justify-center hover:bg-indigo-600/30 hover:ring-2 border-indigo-600/40 active:scale-95 transition-all rounded">
             <img src="icons/notifications.svg" />
-          </Link>
+          </div>
+          {OpenDropDown && <NavBarDropDown setOpenDropDown={setOpenDropDown} />}
 
-          <Link
-            href="/"
-            className="p-1 object-cover w-10   rounded-full h-10 active:bg-zinc-800 active:scale-95 transition-all ring-0 hover:ring-2"
+          <div
+            onClick={() => setOpenDropDown(!OpenDropDown)}
+            className="p-1 cursor-pointer object-cover w-10   rounded-full h-10 active:bg-zinc-800 active:scale-95 transition-all ring-0 hover:ring-2"
           >
             <img
               className="w-full avatar rounded-full h-full "
               src="https://res.cloudinary.com/practicaldev/image/fetch/s--IzQa8O37--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/880111/3466b472-ad01-4d41-b1df-dfec0218378f.jpg"
               alt=""
             />
-          </Link>
+          </div>
         </div>
       </nav>
     </div>
