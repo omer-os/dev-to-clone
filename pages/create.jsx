@@ -1,17 +1,7 @@
 import { useEffect, useState } from "react";
-import {
-  addDoc,
-  collection,
-  getDocs,
-  getFirestore,
-  setDoc,
-} from "firebase/firestore";
-import {
-  AddDocumentToCollection,
-  DeleteAllDocuments,
-} from "../backend/Functions";
-import { PostsCollection } from "../backend/collections";
-import { Authentication } from "../backend/db";
+import { AddNewPost } from "../backend/db";
+import { auth } from "../backend/Auth";
+import { useRouter } from "next/router";
 
 export default function Create({ posts }) {
   const [Title, setTitle] = useState("");
@@ -19,7 +9,7 @@ export default function Create({ posts }) {
   const [Content, setContent] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [imageData, setImageData] = useState(null);
-
+  const router = useRouter()
   return (
     <div className="w-full h-full px-2 flex flex-col items-center">
       <div className="max-w-[50em] w-full  bg-zinc-900 border border-zinc-800 rounded mt-4">
@@ -31,14 +21,14 @@ export default function Create({ posts }) {
         />
 
         <div className="top-input-area flex flex-col py-4 px-5">
-          <button
+          {/* <button
             onClick={() => {
               DeleteAllDocuments(PostsCollection);
             }}
             className="w-max py-2 px-3 rounded border border-zinc-700 text-xs font-bold hover:bg-zinc-800 active:scale-95 active:bg-zinc-700 "
           >
             Delete all posts
-          </button>
+          </button> */}
           <input
             required
             type="text"
@@ -74,15 +64,19 @@ export default function Create({ posts }) {
         <div className="flex gap-3">
           <button
             onClick={() => {
-              AddDocumentToCollection(PostsCollection, {
+              AddNewPost({
                 postTitle: Title,
                 postTags: tags.split(" "),
                 postContent: Content,
                 // postImageData: imageData ? imageData : false,
-                userId: Authentication.currentUser.uid,
+                userId: auth.currentUser.uid,
+                userName: auth.currentUser.displayName,
                 postReactions: 0,
                 postReadTime: 2,
+                userImage:auth.currentUser.photoURL              
               });
+
+              router.push("/")
             }}
             className="bg-indigo-600 p-2 rounded font-bold active:scale-95 active:bg-indigo-700 text-sm transition-all"
           >
@@ -188,16 +182,4 @@ const CoverImage = ({ imageFile, setImageFile, imageData, setImageData }) => {
       )}
     </div>
   );
-};
-
-export const getStaticProps = async () => {
-  const data = await getDocs(PostsCollection);
-  var posts = [];
-  data.docs.map((doc) => {
-    posts.push(doc.data());
-  });
-
-  return {
-    props: { posts },
-  };
 };

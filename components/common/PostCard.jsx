@@ -17,14 +17,16 @@ export default function PostCard({ post }) {
       <div className="flex p-3 flex-col">
         <div className="left flex gap-3">
           <div className="rounded-full w-7 h-7">
-            <img
-              src="https://res.cloudinary.com/practicaldev/image/fetch/s--r9_xn5ov--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/994177/0875a917-2e25-42ea-8d33-5855555fefb9.png"
-              className="w-full object-cover rounded-full h-full"
-              alt=""
-            />
+            {post.userImage && (
+              <img
+                src={post.userImage}
+                className="w-full object-cover rounded-full h-full"
+                alt=""
+              />
+            )}
           </div>
           <div className="flex text-xs flex-col">
-            <div className="font-bold capitalize">{post.userId}</div>
+            <div className="font-bold capitalize">{post.userName}</div>
             <div className="text-zinc-400">Dec 24 (10 hours ago)</div>
           </div>
         </div>
@@ -42,7 +44,7 @@ export default function PostCard({ post }) {
 
           <div className="flex justify-between">
             <div className="flex mt-3 gap-1">
-              {post.postReactions && (
+              {post && (
                 <button className="flex gap-1 rounded text-xs active:scale-95 transition-all active:bg-zinc-700 hover:bg-zinc-900 p-2 items-center">
                   <svg
                     width="20"

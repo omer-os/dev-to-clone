@@ -1,30 +1,22 @@
-import React from "react";
-import {
-  DeleteAllDocuments,
-  DeletePosts,
-  DeleteUsers,
-} from "../backend/Functions";
-import { PostsCollection, UsersCollection } from "../backend/collections";
+import { useEffect } from "react";
+import { getAllPosts } from "../backend/testdb";
 
-export default function Test() {
-  return (
-    <div className="p-3 flex flex-wrap gap-4">
-      <button
-        onClick={() => {
-          DeleteUsers();
-        }}
-        className="bg-zinc-900 text-xl font-bold p-2 rounded border border-zinc-800 active:scale-95 transition-all active:bg-zinc-800 capitalize"
-      >
-        delete all users
-      </button>
-      <button
-        onClick={() => {
-          DeletePosts();
-        }}
-        className="bg-zinc-900 text-xl font-bold p-2 rounded border border-zinc-800 active:scale-95 transition-all active:bg-zinc-800 capitalize"
-      >
-        delete all posts
-      </button>
-    </div>
-  );
+export default function Test({data}) {
+  return <div className="p-3 flex flex-wrap gap-4">
+    {
+      JSON.parse(data).map((i)=>(
+        <p>{i.postContent}</p>
+      ))
+    }
+  </div>;
 }
+
+export const getServerSideProps = async () => {
+  const posts = await getAllPosts();
+  // console.log(JSON.stringify(posts));
+  return {
+    props: {
+      data: JSON.stringify(posts),
+    },
+  };
+};

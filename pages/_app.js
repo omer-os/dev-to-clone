@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import DefaultLayout from "../components/layout/DefaultLayout";
 import NavBarLayout from "../components/layout/NavBarLayout";
+import TopLayout from "../components/layout/TopLayout";
 
 export default function App({ Component, pageProps }) {
   let LayoutComponent;
@@ -22,8 +23,10 @@ export default function App({ Component, pageProps }) {
   }
 
   return (
-    <LayoutComponent>
-      <Component {...pageProps} />
-    </LayoutComponent>
+    <TopLayout>
+      <LayoutComponent>
+        <Component {...pageProps} />
+      </LayoutComponent>
+    </TopLayout>
   );
 }

@@ -1,18 +1,17 @@
 import Link from "next/link";
 import React from "react";
 
-export default function NavBarDropDown({ setOpenDropDown }) {
+export default function NavBarDropDown({ setOpenDropDown, userName }) {
   return (
     <div className="absolute p-2 bg-zinc-900 top-[4em] right-2 sm:right-[5em] rounded border border-zinc-800 w-[10em]">
       <Link
         onClick={() => setOpenDropDown(false)}
-        href="/user"
+        href={`/user/${userName}`}
         className="flex py-1 px-2 rounded border-b hover:text-indigo-400 hover:bg-indigo-600/30 group hover:underline transition-all border-zinc-800 pb-2 flex-col"
       >
         <div className="flex flex-col">
-          <div className="text-sm">omar chatin</div>
           <div className="text-xs group-hover:text-indigo-400 text-zinc-400">
-            @omarchatin
+            @{userName}
           </div>
         </div>
       </Link>

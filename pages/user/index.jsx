@@ -40,11 +40,8 @@ export default function User() {
 
       <div className="bg-zinc-900 flex gap-10">
         <div className="max-w-[10em] h-full w-full"></div>
-      
-      <div className="flex-1 flex flex-col gap-3">
-        {/* <PostCard  /> */}
-        
-      </div>
+
+        <div className="flex-1 flex flex-col gap-3">{/* <PostCard  /> */}</div>
       </div>
     </div>
   );
